@@ -27,13 +27,20 @@ def make_plots(counts):
     plt.show()
 
 
+def run_distribution_analysis(path):
+    try:
+        counts = analyze_directory(path)
+        make_plots(counts)
+        return counts
+    except Exception as e:
+        print(f"Error: {e}")
+
+
 def main():
     if (len(sys.argv) != 2):
         print("Usage: python3 Distribution.py <directory_path>")
         sys.exit(1)
-
-    counts = analyze_directory(sys.argv[1])
-    make_plots(counts)
+    run_distribution_analysis(sys.argv[1])
 
 
 if __name__ == "__main__":
