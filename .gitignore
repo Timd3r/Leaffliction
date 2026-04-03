@@ -1,2 +1,5 @@
 *.JPG
 *.zip
+/images
+*.txt
+/venv
