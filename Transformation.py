@@ -248,13 +248,17 @@ class Transformation:
         """Color Histogram (Figure IV.7)."""
         hsv = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2HSV)
         lab = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2LAB)
-        plots = [(self.img_bgr, 2, 'blue', '#0000FF'), (lab, 2, 'blue-yellow', '#FFFF00'),
-                 (self.img_bgr, 1, 'green', '#008000'), (lab,
-                                                         1, 'green-magenta', '#FF00FF'),
-                 (hsv, 0, 'hue', '#8A2BE2'), (lab, 0, 'lightness', '#696969'),
-                 (self.img_bgr, 0, 'red', '#FF0000'), (hsv,
-                                                       1, 'saturation', '#00FFFF'),
-                 (hsv, 2, 'value', '#FFA500')]
+        plots = [
+            (self.img_bgr, 2, 'blue', '#0000FF'),
+            (lab, 2, 'blue-yellow', '#FFFF00'),
+            (self.img_bgr, 1, 'green', '#008000'),
+            (lab, 1, 'green-magenta', '#FF00FF'),
+            (hsv, 0, 'hue', '#8A2BE2'),
+            (lab, 0, 'lightness', '#696969'),
+            (self.img_bgr, 0, 'red', '#FF0000'),
+            (hsv, 1, 'saturation', '#00FFFF'),
+            (hsv, 2, 'value', '#FFA500')
+        ]
         plt.figure(figsize=(10, 6))
         for group, i, name, color in plots:
             hist = cv2.calcHist(
@@ -267,10 +271,12 @@ class Transformation:
         plt.legend(title="Channel", loc='center left', bbox_to_anchor=(1, 0.5))
         plt.xlim(0, 255)
         plt.grid(True)
-        self._save(plt.gcf(), 'Color_histogram')
-        if not self.dest_dir:
-            plt.show()
-            plt.close()
+        file_name = os.path.splitext(self.filename)[0]
+        os.makedirs("./color_histograms", exist_ok=True)
+        # save image at the path ./color_histograms/{file_name}_Color_histogram.jpg
+        # plt.savefig(f"./color_histograms/{file_name}_Color_histogram.jpg")
+        plt.close()  # Close the plot to free memory
+        return plots
 
 
 def main():

@@ -1,0 +1,20 @@
+Validation Accuracy: 92.74%
+Validation Set Size: 813 images
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   Black_rot       0.85      0.92      0.88       236
+        Esca       0.94      0.87      0.91       277
+     healthy       1.00      0.99      0.99        85
+        spot       0.98      0.98      0.98       215
+
+    accuracy                           0.93       813
+   macro avg       0.94      0.94      0.94       813
+weighted avg       0.93      0.93      0.93       813
+
+Confusion Matrix:
+[[218  15   0   3]
+ [ 34 242   0   1]
+ [  0   0  84   1]
+ [  5   0   0 210]]

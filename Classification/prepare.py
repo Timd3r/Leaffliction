@@ -100,8 +100,6 @@ def balance_datasets(counts):
 def create_train_test_split():
     """
     Splits the data in ./data into train and test folders with an random 80/20 split
-    the test folder has the sub directories Apple and Grape with the same subdirectories as the original dataset in
-     and the train folder doesn't and the file has a random name (image_(random number).JPG)
     """
     for parent in ["Apple", "Grape"]:
         parent_path = os.path.join("./data", parent)
@@ -124,9 +122,8 @@ def create_train_test_split():
 
                 for file in test_files:
                     src_file = os.path.join(category_path, file)
-                    file_name = f"image_{random.randint(1, 100000)}_{category}.JPG"
                     dst_file = os.path.join(
-                        "./data/test", parent, file_name)
+                        "./data/test", parent, category, file)
                     os.makedirs(os.path.dirname(dst_file), exist_ok=True)
                     shutil.copy(src_file, dst_file)
 
