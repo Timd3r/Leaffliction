@@ -8,3 +8,12 @@
 venv/
 .venv/
 env/
+
+#python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
