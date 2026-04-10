@@ -22,7 +22,9 @@ def make_plots(counts):
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
     axs[0].pie(values, autopct='%1.1f%%', colors=colors)
 
-    axs[1].bar(names, values, color=colors)
+    bars = axs[1].bar(names, values, color=colors)
+    axs[1].bar_label(bars, label_type='edge', color='black')
+
     plt.tight_layout()
     plt.show()
 

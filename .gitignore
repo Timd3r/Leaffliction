@@ -1,2 +1,10 @@
 *.JPG
 *.zip
+*.jpg
+*.png
+*.jpeg
+
+# Virtual Environments
+venv/
+.venv/
+env/

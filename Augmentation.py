@@ -3,20 +3,20 @@ import os
 import sys
 
 
-def augment_image(image_path):
+def augment_image(image_path, save_location=None):
     try:
-        # Convert to handle PNG/JPG consistently
+        # Convert to handle JPG consistently
         img = Image.open(image_path).convert("RGB")
         w, h = img.size
 
-        # Perspective Matrix for the "Tilted Card" look
+        # Perspective Matrix
         zoom = 0.7
         matrix = (1/zoom, 0, -w*(1-zoom)/2, 0, 1 /
                   zoom, -h*(1-zoom)/2, 0.0015, -0.001)
 
         variations = [
             (img.rotate(45), "Rotation"),
-            (img.filter(ImageFilter.BLUR), "Blur"),
+            (img.filter(ImageFilter.GaussianBlur(radius=1)), "Blur"),
             (ImageEnhance.Contrast(img).enhance(2), "Contrast"),
             (img.crop((0, 0, w // 1.2, h // 1.2)).resize((w, h)), "Scaling"),
             (ImageEnhance.Brightness(img).enhance(1.5), "Illumination"),
@@ -25,8 +25,12 @@ def augment_image(image_path):
         ]
 
         base_name, ext = os.path.splitext(image_path)
+        file_name = os.path.basename(base_name)
         for i, (aug_img, aug_name) in enumerate(variations):
-            aug_img.save(f"{base_name}_{aug_name}{ext}")
+            if save_location:
+                aug_img.save(f"{save_location}/{file_name}_{aug_name}{ext}")
+            else:
+                aug_img.save(f"{base_name}_{aug_name}{ext}")
 
     except Exception as e:
         print(f"Error: {e}")

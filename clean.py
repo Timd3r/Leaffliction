@@ -11,8 +11,8 @@ def clean_directory(root_path):
 
 
 def main():
-    clean_directory('./data/Apple')
-    clean_directory('./data/Grape')
+    clean_directory('./leaves/images/Apple')
+    clean_directory('./leaves/images/Grape')
     print("Removed all augmented files")
 
 
