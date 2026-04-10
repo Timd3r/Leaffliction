@@ -21,14 +21,14 @@ def main():
         sys.exit(1)
 
     base_dir = sys.argv[1].rstrip('/')
-    print(f"📂 Loading datasets for {base_dir}...")
+    print(f"Loading datasets for {base_dir}...")
 
     # Load your pre-split CSVs
     train_path = f"train_{base_dir.lower()}.csv"
     test_path = f"test_{base_dir.lower()}.csv"
 
     if not os.path.exists(train_path) or not os.path.exists(test_path):
-        print("❌ train/test CSVs not found. Run create_dataset.py first.")
+        print("train/test CSVs not found. Run create_dataset.py first.")
         sys.exit(1)
 
     train_df = pd.read_csv(train_path)
@@ -47,12 +47,12 @@ def main():
     X_test, y_test = test_df[feature_cols], test_df['label_clean']
 
     print(
-        f"📊 Training samples: {len(X_train)} | Validation samples: {len(X_test)}")
+        f"Training samples: {len(X_train)} | Validation samples: {len(X_test)}")
     if len(X_test) < 100:
         print("⚠️ Warning: Validation set has <100 images. Accuracy proof may not meet requirements.")
 
     # Train model
-    print("🌲 Training Random Forest classifier...")
+    print("Training Random Forest classifier...")
     clf = RandomForestClassifier(
         n_estimators=100, max_depth=15, random_state=42, n_jobs=-1)
     clf.fit(X_train, y_train)
@@ -63,8 +63,8 @@ def main():
     report = classification_report(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred, labels=clf.classes_)
 
-    print(f"\n✅ Validation Accuracy: {acc*100:.2f}%")
-    print("\n📊 Classification Report:")
+    print(f"\nValidation Accuracy: {acc*100:.2f}%")
+    print("\nClassification Report:")
     print(report)
 
     # Prepare output directory
@@ -109,8 +109,8 @@ def main():
                             abs_path, start="./data/train")
                         zf.write(abs_path, f"augmented_images/{arcname}")
 
-    print(f"\n📦 All learnings packaged in: {zip_path}")
-    print("✅ Ready for evaluation!")
+    print(f"\nAll learnings packaged in: {zip_path}")
+    print("Ready for evaluation!")
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ def main():
     image_path = os.path.abspath(image_path)
 
     if not os.path.exists(image_path):
-        print(f"❌ Image not found: {image_path}")
+        print(f" Image not found: {image_path}")
         sys.exit(1)
 
     # Locate the learnings ZIP
@@ -67,7 +67,7 @@ def main():
     zip_path = next((z for z in zip_candidates if os.path.exists(z)), None)
 
     if zip_path is None:
-        print("❌ Learnings ZIP not found. Run train.py first.")
+        print(" Learnings ZIP not found. Run train.py first.")
         sys.exit(1)
 
     print(f"📦 Loading model from {zip_path}...")
@@ -84,7 +84,7 @@ def main():
     t.gaussian_blur()
 
     if t.gaussian_mask is None or not np.any(t.gaussian_mask > 128):
-        print("⚠️ No valid leaf detected in image.")
+        print("No valid leaf detected in image.")
         sys.exit(1)
 
     # Recreate plots list exactly as in color_analysis()
@@ -104,10 +104,10 @@ def main():
 
     features = plots_to_features(plots, t.gaussian_mask)
 
-    # 🔑 CRITICAL FIX: Align features exactly with training using pandas DataFrame
+    # Align features exactly with training using pandas DataFrame
     if len(features) != len(feature_names):
         print(
-            f"⚠️ Feature mismatch! Expected {len(feature_names)}, got {len(features)}. Padding/trimming...")
+            f" Feature mismatch! Expected {len(feature_names)}, got {len(features)}. Padding/trimming...")
         features = features[:len(feature_names)]
         features += [0.0] * max(0, len(feature_names) - len(features))
 
@@ -126,8 +126,8 @@ def main():
     proba = clf.predict_proba(X_pred)[0]
     confidence = float(np.max(proba))
 
-    print(f"\n✅ Predicted Disease: {disease}")
-    print(f"📊 Confidence: {confidence*100:.1f}%")
+    print(f"\nPredicted Disease: {disease}")
+    print(f"Confidence: {confidence*100:.1f}%")
 
     # 3. Display Original + Transformed side-by-side
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
