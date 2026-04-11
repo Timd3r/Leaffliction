@@ -114,9 +114,7 @@ def main():
     # DataFrame ensures exact column order & names, eliminating sklearn warnings
     X_pred = pd.DataFrame([features], columns=feature_names)
 
-    # ==========================================
-    # 🔮 PREDICTION & DISPLAY
-    # ==========================================
+    # PREDICTION & DISPLAY
 
     # 1. Get prediction (returns string label directly, e.g., 'scab')
     raw_pred = clf.predict(X_pred)[0]
