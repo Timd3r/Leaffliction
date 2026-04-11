@@ -16,6 +16,7 @@ import shutil
 
 
 def main():
+    """" Main function to load datasets, train model, validate, and package learnings. """
     if len(sys.argv) < 2:
         print("Usage: python3 train.py <directory>")
         sys.exit(1)

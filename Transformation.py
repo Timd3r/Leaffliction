@@ -8,7 +8,7 @@ import argparse
 
 
 class Transformation:
-    """Leaffliction Part 3: Image Transformation Pipeline."""
+    """ Transformation class encapsulates the entire image processing pipeline for leaf disease analysis. It includes methods for loading images, applying Gaussian blur, removing backgrounds, creating disease masks, generating ROIs, analyzing shape/size, creating pseudolandmarks, and performing color analysis. The class is designed"""
 
     def __init__(self, dest_dir=None, file_prefix=""):
         self.dest_dir = dest_dir
@@ -47,7 +47,7 @@ class Transformation:
             self.file_prefix = os.path.splitext(os.path.basename(filename))[0]
 
     def gaussian_blur(self):
-        """Standard Gaussian blur (Figure IV.2)."""
+        """Standard Gaussian blur"""
         gray = pcv.rgb2gray_hsv(rgb_img=self.img_rgb, channel='s')
         mask = pcv.threshold.otsu(gray_img=gray, object_type='light')
         self.gaussian_mask = pcv.gaussian_blur(img=mask, ksize=(7, 7))
@@ -112,7 +112,7 @@ class Transformation:
 
     def create_mask(self):
         """
-        Adaptive Disease Detection (Figure IV.3: Mask).
+        Adaptive Disease Detection
         Uses Excess Green Index + Otsu's threshold. Cuts out ONLY rotten parts.
         """
         leaf_only = self.background_removed.copy()
@@ -197,7 +197,7 @@ class Transformation:
             self._display(roi_img, 'ROI Objects (Overlay)')
 
     def analyze_image(self):
-        """Shape/Size Analysis (Figure IV.5)."""
+        """Shape/Size Analysis"""
         analysis_img = self.img_rgb.copy()
         try:
             analysis_img = pcv.analyze.shape(img=analysis_img, objects=[
@@ -217,7 +217,7 @@ class Transformation:
             self._display(self.analyze, 'Analyze Object')
 
     def create_pseudo_color(self):
-        """Pseudolandmarks (Figure IV.6)."""
+        """Pseudolandmarks"""
         top, bottom, center_v = pcv.homology.x_axis_pseudolandmarks(
             img=self.img_rgb, mask=self.gaussian_mask)
         pcv.outputs.add_observation(sample='plant', variable='bottom_lmk', trait='bottom landmarks',
@@ -245,7 +245,7 @@ class Transformation:
             self._display(vis_img, 'Pseudolandmarks')
 
     def color_analysis(self):
-        """Color Histogram (Figure IV.7)."""
+        """Color Histogram."""
         hsv = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2HSV)
         lab = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2LAB)
         plots = [
@@ -275,11 +275,13 @@ class Transformation:
         os.makedirs("./color_histograms", exist_ok=True)
         # save image at the path ./color_histograms/{file_name}_Color_histogram.jpg
         # plt.savefig(f"./color_histograms/{file_name}_Color_histogram.jpg")
+        plt.show()
         plt.close()  # Close the plot to free memory
         return plots
 
 
 def main():
+    """Main function to parse arguments and run the transformation pipeline on either a single image or a directory of images."""
     parser = argparse.ArgumentParser(
         description='Leaffliction Transformation Part 3')
     parser.add_argument('-src', type=str, required=True,

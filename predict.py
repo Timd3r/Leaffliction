@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-predict.py - Loads learnings, predicts disease, displays original + transformed image
-Usage: python3 predict.py "path/to/image.jpg"
-"""
 from Transformation import Transformation
 import sys
 import os
@@ -44,6 +40,7 @@ def plots_to_features(plots, gaussian_mask):
 
 
 def main():
+    """ Main function to load model, process image, and predict disease."""
     if len(sys.argv) < 2:
         print("Usage: python3 predict.py <image_path>")
         sys.exit(1)

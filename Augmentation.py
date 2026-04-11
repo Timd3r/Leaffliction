@@ -4,6 +4,7 @@ import sys
 
 
 def augment_image(image_path, save_location=None):
+    """ Applies various augmentations to the input image and saves them."""
     try:
         # Convert to handle JPG consistently
         img = Image.open(image_path).convert("RGB")

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def analyze_directory(root_path):
+    """ Analyzes the given directory and counts the number of files in each subdirectory."""
     root = Path(root_path)
 
     subdirs = [d for d in root.iterdir() if d.is_dir()]
@@ -16,6 +17,7 @@ def analyze_directory(root_path):
 
 
 def make_plots(counts):
+    """ Generates a pie chart and bar chart from the counts dictionary."""
     names = list(counts.keys())
     values = list(counts.values())
     colors = ['lightblue', 'lightcoral', 'lightgreen', 'violet']
@@ -30,6 +32,7 @@ def make_plots(counts):
 
 
 def run_distribution_analysis(path):
+    """ Analyzes the distribution of files in the given directory and generates plots."""
     try:
         counts = analyze_directory(path)
         make_plots(counts)
