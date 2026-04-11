@@ -126,16 +126,15 @@ def main():
 
     # 3. Display Original + Transformed side-by-side
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
-    axes[0].imshow(cv2.cvtColor(t.img_bgr, cv2.COLOR_BGR2RGB))
+    axes[0].imshow(t.img_bgr)
     axes[0].set_title("Original Image")
     axes[0].axis('off')
-
+    t.remove_background()  # Ensure background is removed for display
     transformed = t.background_removed if t.background_removed is not None else t.img_bgr
-    axes[1].imshow(cv2.cvtColor(transformed, cv2.COLOR_BGR2RGB))
+    axes[1].imshow(transformed)
     axes[1].set_title(f"Transformed (Prediction: {disease})")
     axes[1].axis('off')
 
-    plt.tight_layout()
     plt.show()
 
 
