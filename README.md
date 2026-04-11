@@ -30,8 +30,7 @@ Leaffliction/
 ├── Distribution.py          # Dataset distribution analysis
 ├── Transformation.py        # Core image transformation pipeline
 ├── train.py                 # Model training script
-├── predict.py              # Disease prediction script
-├── clean.py                # Dataset cleaning utility
+├── predict.py               # Disease prediction script
 ├── feature_config.json      # Feature configuration
 ├── Classification/
 │   ├── prepare.py          # Data preparation and train/test split
