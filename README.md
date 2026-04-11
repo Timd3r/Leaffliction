@@ -98,27 +98,6 @@ python3 Distribution.py "./data/train/Grape"
 - **tqdm** (4.67.3) - Progress bars
 - **plantcv** (4.10.2) - Plant phenotyping image analysis
 
-## Data Analysis & Visualizations
-
-The project includes several visualization outputs showing feature relationships and data distributions:
-
-### feature_correlations.png
-Correlation matrix showing relationships between the 45 extracted color histogram features across all disease categories. Helps identify redundant features and feature dependencies.
-
-### top_features.png
-Bar chart ranking the most important features for disease classification as determined by the Random Forest model. Shows which color statistics have the highest predictive power.
-
-### top_feature_distributions.png
-Distribution plots of the top predictive features across different disease categories. Illustrates how well features separate healthy leaves from diseased ones.
-
-### pca_clusters.png
-PCA (Principal Component Analysis) visualization reducing 45 dimensions to 2D. Shows how different disease categories cluster in lower-dimensional space.
-
-### tsne_clusters.png
-t-SNE (t-Distributed Stochastic Neighbor Embedding) visualization providing another 2D projection of the feature space. Often reveals more natural groupings than PCA.
-
-These visualizations help validate that extracted features effectively distinguish between disease categories.
-
 ## Key Scripts
 
 ### Transformation.py
@@ -153,3 +132,34 @@ Extracts features from images:
 - Processes each image through Transformation pipeline
 - Extracts 45 color histogram statistics per image
 - Generates CSV datasets with features and labels for training
+
+## Data Analysis & Visualizations
+
+The project includes several visualization outputs generated from the `visualize_data.ipynb` notebook, showing feature relationships and data distributions:
+
+### top_features.png
+Bar chart showing the **top 10 most important features** for disease classification as ranked by the Random Forest model. These features have the highest discriminative power in distinguishing between healthy and diseased leaves.
+
+![Top Features](top_features.png)
+
+### top_feature_distributions.png
+Boxplots comparing the distribution of the **top 3 most important features** across different disease categories. Shows how well these features separate healthy leaves from diseased ones using quartiles and outliers.
+
+![Top Feature Distributions](top_feature_distributions.png)
+
+### feature_correlations.png
+Correlation heatmap of the **top 10 features**, showing which features are correlated with each other. Values close to 1 indicate strong positive correlation, -1 indicates negative correlation, and 0 indicates no relationship.
+
+![Feature Correlations](feature_correlations.png)
+
+### pca_clusters.png
+PCA (Principal Component Analysis) visualization reducing the 45 dimensions to 2D. Shows how different disease categories cluster in compressed feature space, explaining proportion of variance captured in each component.
+
+![PCA Clusters](pca_clusters.png)
+
+### tsne_clusters.png
+t-SNE (t-Distributed Stochastic Neighbor Embedding) visualization providing a non-linear 2D projection of the feature space. Often reveals more natural, separated groupings than PCA and better shows local structure in the data.
+
+![t-SNE Clusters](tsne_clusters.png)
+
+All visualizations help validate that extracted color histogram features effectively distinguish between disease categories.
