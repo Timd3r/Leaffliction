@@ -98,6 +98,27 @@ python3 Distribution.py "./data/train/Grape"
 - **tqdm** (4.67.3) - Progress bars
 - **plantcv** (4.10.2) - Plant phenotyping image analysis
 
+## Data Analysis & Visualizations
+
+The project includes several visualization outputs showing feature relationships and data distributions:
+
+### feature_correlations.png
+Correlation matrix showing relationships between the 45 extracted color histogram features across all disease categories. Helps identify redundant features and feature dependencies.
+
+### top_features.png
+Bar chart ranking the most important features for disease classification as determined by the Random Forest model. Shows which color statistics have the highest predictive power.
+
+### top_feature_distributions.png
+Distribution plots of the top predictive features across different disease categories. Illustrates how well features separate healthy leaves from diseased ones.
+
+### pca_clusters.png
+PCA (Principal Component Analysis) visualization reducing 45 dimensions to 2D. Shows how different disease categories cluster in lower-dimensional space.
+
+### tsne_clusters.png
+t-SNE (t-Distributed Stochastic Neighbor Embedding) visualization providing another 2D projection of the feature space. Often reveals more natural groupings than PCA.
+
+These visualizations help validate that extracted features effectively distinguish between disease categories.
+
 ## Key Scripts
 
 ### Transformation.py
